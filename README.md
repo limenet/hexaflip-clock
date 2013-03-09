@@ -1,4 +1,4 @@
 hexaflip-clock
 ==============
 
-Making a live clock witht he hexaflip plugin by Codrops
+Making a live clock with [dmotz/hexaflip](https://github.com/dmotz/hexaflip)
