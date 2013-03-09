@@ -33,9 +33,9 @@
   }
 
   defaults = {
-    size: 200,
-    margin: 10,
-    fontSize: 132,
+    size: 400,
+    margin: 20,
+    fontSize: 264,
     perspective: 1000,
     touchSensitivity: 1
   };
@@ -83,8 +83,8 @@
           minute: (function() {
             var _j, _results;
             _results = [];
-            for (i = _j = 0; _j <= 5; i = ++_j) {
-              _results.push(i + '0');
+            for (i = _j = 0; _j <= 60; i = ++_j) {
+              _results.push(i + '');
             }
             return _results;
           })(),

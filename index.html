@@ -7,7 +7,7 @@
         <title>HexaFlip Clock</title>
         <meta name="description" content="HexaFlip: A Flexible 3D Cube Plugin" />
         <meta name="keywords" content="hexaflip, 3d cube, css3 javascript, plugin, perspective, rotation, transition" />
-        <link rel="shortcut icon" href="../favicon.ico">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,200,400' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="default.css" />
         <link href="hexaflip.css" rel="stylesheet" type="text/css">
         <link href="demo.css" rel="stylesheet" type="text/css">
@@ -16,16 +16,9 @@
         <div class="container">
             <!-- Codrops top bar -->
             <header class="clearfix">
-                <h1>HexaFlip: Time Picker<span>Drag the cubes or use the select menus to set a time.</span></h1>
-                <nav class="codrops-demos">
-                    <a href="index.html">Demo 1</a>
-                    <a class="current-demo" href="index2.html">Demo 2</a>
-                    <a href="index3.html">Demo 3</a>
-                    <a href="index4.html">Demo 4</a>
-                </nav>
             </header>
             <div class="main">
-                <div id="hexaflip-demo3" class="demo"></div>
+                <div id="hexaflip" class="demo"></div>
             </div>
         </div>
     <script src="hexaflip.js"></script>
@@ -35,30 +28,33 @@
 	        var N = Math.pow(10, pad);
 	        return number < N ? ("" + (N + number)).slice(1) : "" + number
 	    }
+	    function timeFlip(){
+            var now = new Date,
+                hour = now.getHours(),
+                minute = now.getMinutes().toString(),
+                seconds = now.getSeconds(),
+                meridian;
+
+
+            if(hour > 12){
+                hour = (hour - 12).toString();
+                meridian = 'pm';
+            }else{
+                meridian = 'am';
+                (hour === 0) && (hour = 12);
+                hour = hour.toString();
+            }
+
+           	minute = padNumberMath(minute, 1);
+            console.log(seconds);
+
+            hexaDemo3.setValue({ hour: hour, minute: minute, meridian: meridian });
+            setTimeout(timeFlip, (60-seconds)*1000);
+	    }
         document.addEventListener('DOMContentLoaded', function(){
-            hexaDemo3 = new HexaFlip(document.getElementById('hexaflip-demo3'));
+            hexaDemo3 = new HexaFlip(document.getElementById('hexaflip'));
 
-            setTimeout(function(){
-                var now = new Date,
-                    hour = now.getHours(),
-                    minute = now.getMinutes().toString(),
-                    meridian;
-
-                if(hour > 12){
-                    hour = (hour - 12).toString();
-                    meridian = 'pm';
-                }else{
-                    meridian = 'am';
-                    (hour === 0) && (hour = 12);
-                    hour = hour.toString();
-                }
-
-               	minute = padNumberMath(minute, 1);
-                console.log(minute);
-
-                hexaDemo3.setValue({ hour: hour, minute: minute, meridian: meridian });
-
-            }, 1);
+            setTimeout(timeFlip, 1);
 
         }, false);
 
