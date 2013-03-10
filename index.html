@@ -14,16 +14,14 @@
     </head>
     <body>
         <div class="container">
-            <!-- Codrops top bar -->
-            <header class="clearfix">
-            </header>
             <div class="main">
                 <div id="hexaflip" class="demo"></div>
             </div>
         </div>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="hexaflip.js"></script>
     <script>
-        var hexaDemo3;
+        var hexa;
         function padNumberMath(number, pad) {
 	        var N = Math.pow(10, pad);
 	        return number < N ? ("" + (N + number)).slice(1) : "" + number
@@ -46,17 +44,43 @@
             }
 
            	minute = padNumberMath(minute, 1);
-            console.log(seconds);
 
-            hexaDemo3.setValue({ hour: hour, minute: minute, meridian: meridian });
+            hexa.setValue({ hour: hour, minute: minute, meridian: meridian });
             setTimeout(timeFlip, (60-seconds)*1000);
 	    }
-        document.addEventListener('DOMContentLoaded', function(){
-            hexaDemo3 = new HexaFlip(document.getElementById('hexaflip'));
-
+        function resize(){
+    	    var viewportWidth = $(window).width();
+    		var viewportHeight = $(window).height();
+            var size,
+                margin = 20,
+                fontSize;
+            size = viewportWidth/4;
+            if(size > viewportHeight*0.8){
+                size = viewportHeight*0.8;
+            }
+            $('.main').css('top', (viewportHeight-size)/2);
+            fontSize = size/1.5;
+    	    var settings = {
+        		size: size,
+    		    margin: margin,
+    		    fontSize: fontSize,
+    		    perspective: 1000,
+    		    touchSensitivity: 1
+    		};
+            return settings;
+        }
+        function makeHexa(){
+            var settings = resize();
+            $('#hexaflip').empty();
+            hexa = new HexaFlip(document.getElementById('hexaflip'), '', settings);
             setTimeout(timeFlip, 1);
-
-        }, false);
+        }
+        $(document).ready(function() {
+            makeHexa();
+        });
+        $(window).resize(function(){
+            makeHexa();
+        });
 
     </script>
     </body>
