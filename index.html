@@ -39,7 +39,8 @@
                 hour = hour.toString();
             }
 
-           	minute = padNumberMath(minute, 1);
+           	//minute = padNumberMath(minute, 1);
+            console.log(minute);
 
             hexa.setValue({ hour: hour, minute: minute, meridian: meridian });
             setTimeout(timeFlip, (60-seconds)*1000);
