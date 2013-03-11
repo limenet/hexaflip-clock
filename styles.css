@@ -33,8 +33,7 @@ body {
     font-weight: 300;
     font-size: 15px;
     color: #333;
-    overflow: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 .container {
 	width: 100%;
