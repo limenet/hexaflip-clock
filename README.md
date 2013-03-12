@@ -12,4 +12,4 @@ Just open the index.html & you have your own clock!
 
 ##Show it!
 
-Here you go!
+[Here you go!](http://limenet.github.com/hexaflip-clock/demo)
