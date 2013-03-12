@@ -9,3 +9,7 @@ I wanted a nice clock for my browser!
 ##How?
 
 Just open the index.html & you have your own clock!
+
+##Show it!
+
+Here you go!
