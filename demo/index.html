@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Clock</title>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,200,400' rel='stylesheet' type='text/css'>
+        <link href="styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="main">
+                <div id="hexaflip" class="demo"></div>
+            </div>
+        </div>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="hexaflip.js"></script>
+    <script>
+        var hexa;
+        function padNumberMath(number, pad) {
+	        var N = Math.pow(10, pad);
+	        return number < N ? ("" + (N + number)).slice(1) : "" + number
+	    }
+	    function timeFlip(){
+            var now = new Date,
+                hour = now.getHours(),
+                minute = now.getMinutes().toString(),
+                seconds = now.getSeconds(),
+                meridian;
+
+
+            if(hour > 12){
+                hour = (hour - 12).toString();
+                meridian = 'pm';
+            }else{
+                meridian = 'am';
+                (hour === 0) && (hour = 12);
+                hour = hour.toString();
+            }
+
+           	//minute = padNumberMath(minute, 1);
+            console.log(minute);
+
+            hexa.setValue({ hour: hour, minute: minute, meridian: meridian });
+            setTimeout(timeFlip, (60-seconds)*1000);
+	    }
+        function resize(){
+    	    var viewportWidth = $(window).width();
+    		var viewportHeight = $(window).height();
+            var size,
+                margin = 20,
+                fontSize;
+            size = viewportWidth/4;
+            if(size > viewportHeight*0.8){
+                size = viewportHeight*0.8;
+            }
+            $('.main').css('top', (viewportHeight-size)/2);
+            fontSize = size/1.5;
+    	    var settings = {
+        		size: size,
+    		    margin: margin,
+    		    fontSize: fontSize,
+    		    perspective: 1000,
+    		    touchSensitivity: 1
+    		};
+            return settings;
+        }
+        function makeHexa(){
+            var settings = resize();
+            $('#hexaflip').empty();
+            hexa = new HexaFlip(document.getElementById('hexaflip'), '', settings);
+            setTimeout(timeFlip, 1);
+        }
+        $(document).ready(function() {
+            makeHexa();
+        });
+        $(window).resize(function(){
+            makeHexa();
+        });
+
+    </script>
+    </body>
+</html>
