@@ -40,9 +40,17 @@
             }
 
            	//minute = padNumberMath(minute, 1);
-            console.log(minute);
 
             hexa.setValue({ hour: hour, minute: minute, meridian: meridian });
+            if(minute < 10){
+            	$('.hexaflip-cube-minute div').each(function(){
+            		console.log($(this));
+            		console.log($(this).text());
+            		if($(this).text() == minute){
+            			$(this).text('0'+minute);
+            		}
+            	});
+            }
             setTimeout(timeFlip, (60-seconds)*1000);
 	    }
         function resize(){
@@ -80,15 +88,5 @@
         });
 
     </script>
-    <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-  <script type="text/javascript">
-    try {
-      var pageTracker = _gat._getTracker("UA-39224756-1");
-    pageTracker._trackPageview();
-    } catch(err) {}
-  </script>
     </body>
 </html>
