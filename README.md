@@ -13,3 +13,4 @@ Just open the index.html & you have your own clock!
 ##Show it!
 
 [Here you go!](http://limenet.github.com/hexaflip-clock/demo)
+(I also wrote a little bit about it [on my blog](http://www.limenet.ch/2013/03/hexaflip-clock/))
